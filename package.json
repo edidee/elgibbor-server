@@ -4,7 +4,8 @@
   "description": "the server-side codes for the school fees management system",
   "main": "index.js",
    "engines": {
-    "node": "16.x"
+    "node": "16.x",
+     "npm": "6.x"
   },
   "scripts": {
     "start": "node index",
