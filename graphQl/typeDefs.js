@@ -79,15 +79,26 @@ module.exports = gql`
     academicSession: String!
     amount: Int!
   }
-
+  input StudentsDetails {
+    oldClass: String!
+    newClass: String!
+  }
+  input DemoteStudentsDetails {
+    admissionNumber: String!
+    newClass: String!
+  }
+  input SchoolfeesDetails {
+    amount: Int!
+    studentClass: String!
+  }
   type Mutation {
     registerStudent(registerInput: RegisterInput): Student!
     editStudent(editInput: EditInput): Student!
-    promoteStudents(oldClass: String!, newClass: String!): String!
-    demoteStudent(admissionNumber: String!, newClass: String!): String!
+    promoteStudents(studentsDetails: StudentsDetails!): String!
+    demoteStudent(demoteStudentsDetails: DemoteStudentsDetails!): String!
     withdrawStudent(admissionNumber: String!): String!
     editPayment(paymentInput: PaymentInput!): Student!
-    setSchoolfee(amount: Int!, studentClass: String!): String!
+    setSchoolfee(schoolfeesDetails: SchoolfeesDetails): String!
     adminLogin(username: String!, password: String!): Admin!
   }
   type Query {

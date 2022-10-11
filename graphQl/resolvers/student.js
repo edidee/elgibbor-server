@@ -5,6 +5,9 @@ const Student = require("../../models/Student");
 const {
   validateRegisterStudent,
   validatePaymentInput,
+  validateStudentsDetails,
+  validateDemoteStudentsDetails,
+  validateSetSchoolfeesDetails,
 } = require("../../utils/validators");
 
 module.exports = {
@@ -272,8 +275,18 @@ module.exports = {
         throw new UserInputError(error);
       }
     },
-    async setSchoolfee(_, { studentClass, amount }) {
+    async setSchoolfee(
+      _,
+      { validateSetSchoolfeesDetails: { studentClass, amount } }
+    ) {
       try {
+        const { errors, valid } = validateSetSchoolfeesDetails(
+          studentClass,
+          amount
+        );
+        if (!valid) {
+          throw new UserInputError("Errors", { errors });
+        }
         const students = await Student.find({ studentClass });
         if (students == 0) {
           return "Student class does not exist";
@@ -291,8 +304,15 @@ module.exports = {
         throw new UserInputError(error);
       }
     },
-    async promoteStudents(_, { oldClass, newClass }) {
+    async promoteStudents(
+      _,
+      { validateStudentsDetails: { oldClass, newClass } }
+    ) {
       try {
+        const { errors, valid } = validateStudentsDetails(oldClass, newClass);
+        if (!valid) {
+          throw new UserInputError("Errors", { errors });
+        }
         const students = await Student.find({ oldClass });
         if (students == 0) {
           return "Student class does not exist";
@@ -311,7 +331,17 @@ module.exports = {
         throw new UserInputError(error);
       }
     },
-    async demoteStudent(_, { admissionNumber, newClass }) {
+    async demoteStudent(
+      _,
+      { validateDemoteStudentsDetails: { admissionNumber, newClass } }
+    ) {
+      const { errors, valid } = validateDemoteStudentsDetails(
+        admissionNumber,
+        newClass
+      );
+      if (!valid) {
+        throw new UserInputError("Errors", { errors });
+      }
       const student = await Student.findOne({ admissionNumber });
       if (!student) {
         throw new UserInputError("Student not found");

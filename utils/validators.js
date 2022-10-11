@@ -93,3 +93,42 @@ module.exports.validateAdminLogin = (username, password) => {
     valid: Object.keys(errors).length < 1,
   };
 };
+module.exports.validateStudentsDetails = (oldClass, newClass) => {
+  const errors = {};
+  if (oldClass.trim() === "") {
+    errors.oldClass = "oldClass cannot be empty";
+  }
+  if (newClass.trim() === "") {
+    errors.newClass = "newClass cannot be empty";
+  }
+  return {
+    errors,
+    valid: Object.keys(errors).length < 1,
+  };
+};
+module.exports.validateDemoteStudentsDetails = (admissionNumber, newClass) => {
+  const errors = {};
+  if (admissionNumber.trim() === "") {
+    errors.admissionNumber = "admissionNumber cannot be empty";
+  }
+  if (newClass.trim() === "") {
+    errors.newClass = "newClass cannot be empty";
+  }
+  return {
+    errors,
+    valid: Object.keys(errors).length < 1,
+  };
+};
+module.exports.validateSetSchoolfeesDetails = (amount, studentClass) => {
+  const errors = {};
+  if (amount === 0 || null) {
+    errors.amount = "school fees amount cannot be Zero";
+  }
+  if (studentClass.trim() === "") {
+    errors.studentClass = "Students Class cannot be empty";
+  }
+  return {
+    errors,
+    valid: Object.keys(errors).length < 1,
+  };
+};
