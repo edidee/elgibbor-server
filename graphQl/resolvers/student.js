@@ -275,10 +275,7 @@ module.exports = {
         throw new UserInputError(error);
       }
     },
-    async setSchoolfee(
-      _,
-      { validateSetSchoolfeesDetails: { studentClass, amount } }
-    ) {
+    async setSchoolfee(_, { schoolfeesDetails: { studentClass, amount } }) {
       try {
         const { errors, valid } = validateSetSchoolfeesDetails(
           studentClass,
@@ -304,10 +301,7 @@ module.exports = {
         throw new UserInputError(error);
       }
     },
-    async promoteStudents(
-      _,
-      { validateStudentsDetails: { oldClass, newClass } }
-    ) {
+    async promoteStudents(_, { studentsDetails: { oldClass, newClass } }) {
       try {
         const { errors, valid } = validateStudentsDetails(oldClass, newClass);
         if (!valid) {
@@ -333,7 +327,7 @@ module.exports = {
     },
     async demoteStudent(
       _,
-      { validateDemoteStudentsDetails: { admissionNumber, newClass } }
+      { demoteStudentsDetails: { admissionNumber, newClass } }
     ) {
       const { errors, valid } = validateDemoteStudentsDetails(
         admissionNumber,

@@ -47,17 +47,12 @@ const { MONGODB } = require("./config");
   server.applyMiddleware({ app });
 
   const PORT = process.env.PORT || 5000;
-  const database = mongoose
-    .connect(MONGODB, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    })
-    .then(() => {
-      console.log("Database Connected");
-      return httpServer.listen(PORT, () =>
-        console.log(`Server is now running on http://localhost:${PORT}/graphql`)
-      );
-    });
+  const database = mongoose.connect(MONGODB).then(() => {
+    console.log("Database Connected");
+    return httpServer.listen(PORT, () =>
+      console.log(`Server is now running on http://localhost:${PORT}/graphql`)
+    );
+  });
   database.catch((err) => {
     console.log("Database connections failed", err);
   });
