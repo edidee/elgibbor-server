@@ -293,6 +293,7 @@ module.exports = {
             (student) => (
               (student.schoolFees = amount),
               (student.balance = student.balance + amount)
+              (student.cleared = false)
             )
           );
           await Student.bulkSave(students);
