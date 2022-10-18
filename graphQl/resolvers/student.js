@@ -284,6 +284,7 @@ module.exports = {
         if (!valid) {
           throw new UserInputError("Errors", { errors });
         }
+
         const students = await Student.find({ studentClass });
         if (students == 0) {
           return "Student class does not exist";

@@ -124,7 +124,7 @@ module.exports.validateSetSchoolfeesDetails = (amount, studentClass) => {
   if (amount === 0 || null) {
     errors.amount = "school fees amount cannot be Zero";
   }
-  if (studentClass.trim() === "") {
+  if (studentClass === "") {
     errors.studentClass = "Students Class cannot be empty";
   }
   return {
