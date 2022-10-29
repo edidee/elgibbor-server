@@ -6,7 +6,6 @@
   "scripts": {
     "start": "nodemon index",
     "serve": "node index",
-    "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Samora Cletus",
